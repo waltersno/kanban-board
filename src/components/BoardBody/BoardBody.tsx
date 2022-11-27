@@ -48,10 +48,10 @@ export const BoardBody = () => {
           </SC.TaskGroup>
         ))}
         <div>
-          <button type='button'>
+          <SC.CreateStatusButton>
             <img src={GrayPlus} alt='' />
             <p>Create status</p>
-          </button>
+          </SC.CreateStatusButton>
           <div />
         </div>
       </SC.TasksGroupWrapper>

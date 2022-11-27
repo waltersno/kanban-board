@@ -38,7 +38,7 @@ const Notification = styled.div`
 const TasksGroupWrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
-  height: 100%;
+  height: calc(100vh - 139px);
 `;
 
 const TasksWrapper = styled.div`
@@ -79,6 +79,23 @@ const TaskGroupHeader = styled.div`
   }
 `;
 
+const CreateStatusButton = styled.button`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 58px;
+  background-color: transparent;
+  border: none;
+  gap: 4px;
+  color: var(--gray40);
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 1px solid var(--gray5);
+  border-left: 1px solid var(--gray5);
+`
+
 export const StyledHeader = {
   Header,
   HeaderLeftSide,
@@ -88,4 +105,5 @@ export const StyledHeader = {
   TaskGroup,
   TaskGroupHeader,
   TasksWrapper,
+  CreateStatusButton
 };
