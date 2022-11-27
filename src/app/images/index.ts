@@ -10,6 +10,7 @@ import Search from './search.svg';
 import Tasks from './tasks.svg';
 import Plus from './plus.svg';
 import ArrowDownBlack from './arrow-down-black.svg';
+import GrayPlus from './gray-plus.svg';
 
 export {
   ArrowDown,
@@ -24,4 +25,5 @@ export {
   Tasks,
   Plus,
   ArrowDownBlack,
+  GrayPlus,
 };

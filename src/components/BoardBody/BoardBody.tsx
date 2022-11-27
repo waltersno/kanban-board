@@ -1,7 +1,10 @@
-import { ArrowDownBlack, Avatar, Bell, Plus } from 'app/images';
+import { ArrowDownBlack, Avatar, Bell, GrayPlus, Plus } from 'app/images';
 import { Button } from 'shared/components/Button/Button';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
+import { TaskCard } from 'shared/components/TaskCard/TaskCard';
 import { BLACK20_HEX_COLOR } from 'shared/constants/styles';
+import { generateReactKey } from 'shared/helpers/react';
+import { tasksGroup } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
 export const BoardBody = () => {
@@ -30,6 +33,28 @@ export const BoardBody = () => {
           <img width={40} height={40} src={Avatar} alt='' />
         </SC.HeaderRightSide>
       </SC.Header>
+      <SC.TasksGroupWrapper>
+        {tasksGroup.map(({ title, count, taskItems }) => (
+          <SC.TaskGroup key={title}>
+            <SC.TaskGroupHeader>
+              <h3>{title}</h3>
+              <span>{count}</span>
+            </SC.TaskGroupHeader>
+            <SC.TasksWrapper>
+              {taskItems.map(({ taskTitle, time, type }, index) => (
+                <TaskCard time={time} title={taskTitle} type={type} key={generateReactKey(index)} />
+              ))}
+            </SC.TasksWrapper>
+          </SC.TaskGroup>
+        ))}
+        <div>
+          <button type='button'>
+            <img src={GrayPlus} alt='' />
+            <p>Create status</p>
+          </button>
+          <div />
+        </div>
+      </SC.TasksGroupWrapper>
     </main>
   );
 };
