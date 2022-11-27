@@ -1,45 +1,9 @@
 import { FC, PropsWithChildren } from 'react';
 import {
-  BLUE40_HEX_COLOR,
-  GRAY10_HEX_COLOR,
-  TRANSPARENT,
   WHITE10_HEX_COLOR,
 } from 'shared/constants/styles';
-import styled from 'styled-components';
-
-interface IButton {
-  primary?: boolean;
-  imgSource?: string;
-  transparentBg?: boolean;
-  imgPosition?: 'before' | 'after';
-  textColor?: string;
-  padding?: string;
-}
-
-const StyledButton = styled.button<
-  Pick<IButton, 'transparentBg' | 'primary' | 'textColor' | 'padding'>
->`
-  padding: ${({ padding }) => padding || '10px'};
-  border-radius: 50px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: ${({ textColor }) => textColor};
-  background-color: ${({ primary, transparentBg }) => {
-    if (transparentBg) {
-      return TRANSPARENT;
-    }
-
-    if (primary) {
-      return BLUE40_HEX_COLOR;
-    }
-
-    return GRAY10_HEX_COLOR;
-  }};
-`;
+import { IButton } from './Button.types';
+import { StyledButton as SC } from './Button.styled';
 
 export const Button: FC<PropsWithChildren<IButton>> = ({
   children,
@@ -47,29 +11,34 @@ export const Button: FC<PropsWithChildren<IButton>> = ({
   primary,
   transparentBg,
   padding,
+  isActive,
+  onClick,
+  flipImage = false,
   textColor = WHITE10_HEX_COLOR,
   imgPosition = 'before',
 }) => {
   return (
-    <StyledButton
+    <SC.Button
       transparentBg={transparentBg}
       primary={primary}
       textColor={textColor}
       padding={padding}
+      onClick={onClick}
+      isActive={isActive}
     >
       {imgPosition === 'after' && (
         <>
           {children}
-          {imgSource && <img src={imgSource} alt='' />}
+          {imgSource && <SC.Image flipImage={flipImage} src={imgSource} alt='' />}
         </>
       )}
 
       {imgPosition === 'before' && (
         <>
-          {imgSource && <img src={imgSource} alt='' />}
+          {imgSource && <SC.Image flipImage={flipImage} src={imgSource} alt='' />}
           {children}
         </>
       )}
-    </StyledButton>
+    </SC.Button>
   );
 };

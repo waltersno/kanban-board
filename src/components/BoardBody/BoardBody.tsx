@@ -1,20 +1,13 @@
-import { ArrowDownBlack, Avatar, Bell, GrayPlus, Plus } from 'app/images';
+import { Avatar, Bell, GrayPlus, Plus } from 'app/images';
 import { Button } from 'shared/components/Button/Button';
+import { Dropdown } from 'shared/components/Dropdown/Dropdown';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
 import { TaskCard } from 'shared/components/TaskCard/TaskCard';
-import { BLACK20_HEX_COLOR } from 'shared/constants/styles';
 import { generateReactKey } from 'shared/helpers/react';
 import { tasksGroup } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
 export const BoardBody = () => {
-  const secondaryButtonProps = {
-    padding: '12px 20px',
-    textColor: BLACK20_HEX_COLOR,
-    imgPosition: 'after',
-    imgSource: ArrowDownBlack,
-  } as const;
-
   return (
     <main>
       <SC.Header>
@@ -22,8 +15,8 @@ export const BoardBody = () => {
           <Button primary padding='12px 20px 12px 27px' imgSource={Plus}>
             Add new
           </Button>
-          <Button {...secondaryButtonProps}>Kanban</Button>
-          <Button {...secondaryButtonProps}>Filter</Button>
+          <Dropdown initialValue='Kanban' dropdownItems={['Board view', 'Table view', 'Kanban']} />
+          <Dropdown initialValue='Filter' dropdownItems={['Popularity', 'Task count', 'Finished']} />
         </SC.HeaderLeftSide>
         <SC.HeaderRightSide>
           <SearchInput />

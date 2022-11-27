@@ -37,7 +37,7 @@ const Notification = styled.div`
 
 const TasksGroupWrapper = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(4, 300px) 1fr;
   height: calc(100vh - 139px);
 `;
 
