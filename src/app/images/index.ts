@@ -8,5 +8,20 @@ import Notes from './notes.svg';
 import RoadMap from './roadmap.svg';
 import Search from './search.svg';
 import Tasks from './tasks.svg';
+import Plus from './plus.svg';
+import ArrowDownBlack from './arrow-down-black.svg';
 
-export { ArrowDown, Avatar, Bell, Calendar, Folder, LogoWhite, Notes, RoadMap, Search, Tasks };
+export {
+  ArrowDown,
+  Avatar,
+  Bell,
+  Calendar,
+  Folder,
+  LogoWhite,
+  Notes,
+  RoadMap,
+  Search,
+  Tasks,
+  Plus,
+  ArrowDownBlack,
+};

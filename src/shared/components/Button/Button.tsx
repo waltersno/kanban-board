@@ -1,4 +1,10 @@
 import { FC, PropsWithChildren } from 'react';
+import {
+  BLUE40_HEX_COLOR,
+  GRAY10_HEX_COLOR,
+  TRANSPARENT,
+  WHITE10_HEX_COLOR,
+} from 'shared/constants/styles';
 import styled from 'styled-components';
 
 interface IButton {
@@ -6,20 +12,32 @@ interface IButton {
   imgSource?: string;
   transparentBg?: boolean;
   imgPosition?: 'before' | 'after';
+  textColor?: string;
+  padding?: string;
 }
 
-const StyledButton = styled.button<Pick<IButton, 'transparentBg' | 'primary'>>`
+const StyledButton = styled.button<
+  Pick<IButton, 'transparentBg' | 'primary' | 'textColor' | 'padding'>
+>`
+  padding: ${({ padding }) => padding || '10px'};
   border-radius: 50px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: ${({ textColor }) => textColor};
   background-color: ${({ primary, transparentBg }) => {
     if (transparentBg) {
-      return 'transparent';
+      return TRANSPARENT;
     }
 
     if (primary) {
-      return 'var(--blue40)';
+      return BLUE40_HEX_COLOR;
     }
 
-    return 'var(--gray10)';
+    return GRAY10_HEX_COLOR;
   }};
 `;
 
@@ -28,20 +46,27 @@ export const Button: FC<PropsWithChildren<IButton>> = ({
   imgSource,
   primary,
   transparentBg,
+  padding,
+  textColor = WHITE10_HEX_COLOR,
   imgPosition = 'before',
 }) => {
   return (
-    <StyledButton transparentBg={transparentBg} primary={primary}>
+    <StyledButton
+      transparentBg={transparentBg}
+      primary={primary}
+      textColor={textColor}
+      padding={padding}
+    >
       {imgPosition === 'after' && (
         <>
           {children}
-          <img src={imgSource} alt='' />
+          {imgSource && <img src={imgSource} alt='' />}
         </>
       )}
 
       {imgPosition === 'before' && (
         <>
-          <img src={imgSource} alt='' />
+          {imgSource && <img src={imgSource} alt='' />}
           {children}
         </>
       )}

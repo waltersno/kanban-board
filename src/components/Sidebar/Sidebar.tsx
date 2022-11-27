@@ -1,55 +1,40 @@
 import { ArrowDown, Avatar, LogoWhite } from 'app/images';
 import { Button } from 'shared/components/Button/Button';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
-import styled from 'styled-components';
-
-const SidebarWrapper = styled.aside`
-  background-color: var(--blue50);
-`;
-
-const SidebarHeader = styled.header`
-  display: flex;
-  flex-direction: column;
-  padding: 26px 16px 16px 16px;
-  gap: 26px;
-`;
-
-const SidebarImage = styled.img`
-  /* width: 131px;
-  height: 32px; */
-`;
-
-const WorkspaceButton = styled.button`
-  color: var(--white);
-  border: none;
-  width: 100%;
-  display: flex;
-  background-color: var(--blue30);
-  padding: 6px 16px;
-  align-items: center;
-  gap: 8px;
-`;
-
-const AvatarImg = styled.img``;
-
-const Paragraph = styled.p`
-  font-size: 14px;
-`;
+import { favoritesItems, myProjectsItems } from './Sidebar.data';
+import { StyledSidebarItems as SC } from './Sidebar.styled';
 
 export const Sidebar = () => {
   return (
-    <SidebarWrapper>
-      <SidebarHeader>
-        <SidebarImage width={131} height={32} src={LogoWhite} />
-        <SearchInput />
-      </SidebarHeader>
-      <WorkspaceButton>
-        <AvatarImg width={22} height={22} src={Avatar} alt='avatar' />
-        <Paragraph>My workspace</Paragraph>
-      </WorkspaceButton>
-      <Button imgSource={ArrowDown} transparentBg>
-        Favorites
-      </Button>
-    </SidebarWrapper>
+    <SC.SidebarWrapper>
+      <SC.SidebarHeader>
+        <img width={131} height={32} src={LogoWhite} alt='' />
+        <SearchInput primary />
+      </SC.SidebarHeader>
+      <SC.WorkspaceButton>
+        <SC.AvatarImg width={22} height={22} src={Avatar} alt='avatar' />
+        <SC.Paragraph>My workspace</SC.Paragraph>
+      </SC.WorkspaceButton>
+      <SC.DropdownButtonWrapper>
+        <Button imgSource={ArrowDown} transparentBg>
+          Favorites
+        </Button>
+      </SC.DropdownButtonWrapper>
+      <SC.Ul>
+        {favoritesItems.map((favoriteTitle) => (
+          <SC.Li key={favoriteTitle}>{favoriteTitle}</SC.Li>
+        ))}
+      </SC.Ul>
+      <SC.DropdownButtonWrapper>
+        <Button imgSource={ArrowDown} transparentBg>
+          My Projects
+        </Button>
+      </SC.DropdownButtonWrapper>
+      <SC.Ul>
+        {myProjectsItems.map((myProjectTitle) => (
+          <SC.Li key={myProjectTitle}>{myProjectTitle}</SC.Li>
+        ))}
+      </SC.Ul>
+    </SC.SidebarWrapper>
   );
 };

@@ -32,5 +32,7 @@ export const GlobalStyles = createGlobalStyle`
       --red40: #F21247;
       --purple30: #F2BAE1;
       --white: #fff;
+      --black20: #222;
+      --white5: #F0F1F2;
     }
 `;
