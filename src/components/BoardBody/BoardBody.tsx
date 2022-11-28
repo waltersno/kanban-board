@@ -1,13 +1,16 @@
 import { Avatar, Bell, GrayPlus, Plus } from 'app/images';
+import { useState } from 'react';
 import { Button } from 'shared/components/Button/Button';
 import { Dropdown } from 'shared/components/Dropdown/Dropdown';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
 import { TaskCard } from 'shared/components/TaskCard/TaskCard';
 import { generateReactKey } from 'shared/helpers/react';
-import { tasksGroup } from './BoardBody.data';
+import { tasksGroup, tasksList } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
 export const BoardBody = () => {
+  const [tasks, setTasks] = useState(tasksList);
+
   return (
     <main>
       <SC.Header>
@@ -16,7 +19,10 @@ export const BoardBody = () => {
             Add new
           </Button>
           <Dropdown initialValue='Kanban' dropdownItems={['Board view', 'Table view', 'Kanban']} />
-          <Dropdown initialValue='Filter' dropdownItems={['Popularity', 'Task count', 'Finished']} />
+          <Dropdown
+            initialValue='Filter'
+            dropdownItems={['Popularity', 'Task count', 'Finished']}
+          />
         </SC.HeaderLeftSide>
         <SC.HeaderRightSide>
           <SearchInput />
@@ -27,16 +33,23 @@ export const BoardBody = () => {
         </SC.HeaderRightSide>
       </SC.Header>
       <SC.TasksGroupWrapper>
-        {tasksGroup.map(({ title, count, taskItems }) => (
+        {tasksGroup.map(({ title, count, groupStatus }) => (
           <SC.TaskGroup key={title}>
             <SC.TaskGroupHeader>
               <h3>{title}</h3>
               <span>{count}</span>
             </SC.TaskGroupHeader>
             <SC.TasksWrapper>
-              {taskItems.map(({ taskTitle, time, type }, index) => (
-                <TaskCard time={time} title={taskTitle} type={type} key={generateReactKey(index)} />
-              ))}
+              {tasks
+                .filter((task) => task.status === groupStatus)
+                .map(({ taskTitle, time, type }, index) => (
+                  <TaskCard
+                    time={time}
+                    title={taskTitle}
+                    type={type}
+                    key={generateReactKey(index)}
+                  />
+                ))}
             </SC.TasksWrapper>
           </SC.TaskGroup>
         ))}
