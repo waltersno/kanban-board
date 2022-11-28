@@ -1,3 +1,4 @@
+import { GRAY10_HEX_COLOR, TRANSPARENT } from 'shared/constants/styles';
 import styled from 'styled-components';
 
 interface IDropdownButton {
@@ -21,7 +22,7 @@ const DropdownButton = styled.button<IDropdownButton>`
   cursor: pointer;
   padding: 12px 8px;
   text-align: left;
-  background-color: ${({ isActive }) => (isActive ? 'var(--gray10)' : 'transparent')};
+  background-color: ${({ isActive }) => (isActive ? GRAY10_HEX_COLOR : TRANSPARENT)};
 `;
 
 const DropdownWrapper = styled.div`

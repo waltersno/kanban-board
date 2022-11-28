@@ -1,5 +1,10 @@
-import { TRANSPARENT, BLUE40_HEX_COLOR, GRAY10_HEX_COLOR } from 'shared/constants/styles';
 import styled from 'styled-components';
+import {
+  TRANSPARENT,
+  BLUE40_HEX_COLOR,
+  GRAY10_HEX_COLOR,
+  GRAY25_HEX_COLOR,
+} from 'shared/constants/styles';
 import { IButton } from './Button.types';
 
 const Button = styled.button<
@@ -20,7 +25,7 @@ const Button = styled.button<
     }
 
     if (isActive) {
-      return 'var(--gray25)';
+      return GRAY25_HEX_COLOR;
     }
 
     if (primary) {

@@ -1,14 +1,58 @@
 import { Avatar, Bell, GrayPlus, Plus } from 'app/images';
 import { useState } from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Button } from 'shared/components/Button/Button';
 import { Dropdown } from 'shared/components/Dropdown/Dropdown';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
 import { StatusGroup } from 'shared/components/StatusGroup/StatusGroup';
+import { EStatuses } from 'shared/types/tasks-types';
 import { tasksGroup } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
 export const BoardBody = () => {
   const [statusGroup, setStatusGroup] = useState(tasksGroup);
+
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const { source, destination } = result;
+    const srcDroppableKey = source.droppableId as EStatuses;
+    const destinationDroppableKey = destination.droppableId as EStatuses;
+
+    if (srcDroppableKey !== destinationDroppableKey) {
+      const sourceColumn = statusGroup[srcDroppableKey];
+      const destColumn = statusGroup[destinationDroppableKey];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setStatusGroup({
+        ...statusGroup,
+        [srcDroppableKey]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destinationDroppableKey]: {
+          ...destColumn,
+          items: destItems,
+        },
+      });
+    } else {
+      const column = statusGroup[srcDroppableKey];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setStatusGroup({
+        ...statusGroup,
+        [srcDroppableKey]: {
+          ...column,
+          items: copiedItems,
+        },
+      });
+    }
+  };
 
   return (
     <main>
@@ -32,16 +76,24 @@ export const BoardBody = () => {
         </SC.HeaderRightSide>
       </SC.Header>
       <SC.TasksGroupWrapper>
-        {Object.entries(statusGroup).map(([columnId, column] ) => {
-          return (
-            <StatusGroup
-              key={column.title}
-              count={column.count}
-              tasks={column.items}
-              title={column.title}
-            />
-          );
-        })}
+        <DragDropContext onDragEnd={onDragEnd}>
+          {Object.entries(statusGroup).map(([columnId, column]) => {
+            return (
+              <Droppable droppableId={columnId} key={columnId}>
+                {(provided) => (
+                  <StatusGroup
+                    innerRef={provided.innerRef}
+                    provided={provided}
+                    groupStatus={column.groupStatus}
+                    count={column.count}
+                    tasks={column.items}
+                    title={column.title}
+                  />
+                )}
+              </Droppable>
+            );
+          })}
+        </DragDropContext>
         <div>
           <SC.CreateStatusButton>
             <img src={GrayPlus} alt='' />
