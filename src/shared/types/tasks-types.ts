@@ -11,6 +11,6 @@ export const enum ETaskTypes {
 export enum EStatuses {
   NEW_TASK = 'newTask',
   SCHEDULED = 'scheduled',
-  IN_PROGRESS = 'in_progress',
+  IN_PROGRESS = 'inProgress',
   COMPLETED = 'completed',
 }

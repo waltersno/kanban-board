@@ -1,7 +1,7 @@
 import { EStatuses, ETaskTypes } from "./tasks-types";
 
 export interface ITask {
-  id: number;
+  id: string;
   taskTitle: string;
   time: string;
   cardType: ETaskTypes;

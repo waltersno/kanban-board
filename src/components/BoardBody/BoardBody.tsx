@@ -4,11 +4,11 @@ import { Button } from 'shared/components/Button/Button';
 import { Dropdown } from 'shared/components/Dropdown/Dropdown';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
 import { StatusGroup } from 'shared/components/StatusGroup/StatusGroup';
-import { tasksGroup, tasksList } from './BoardBody.data';
+import { tasksGroup } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
 export const BoardBody = () => {
-  const [tasks, setTasks] = useState(tasksList);
+  const [statusGroup, setStatusGroup] = useState(tasksGroup);
 
   return (
     <main>
@@ -32,15 +32,16 @@ export const BoardBody = () => {
         </SC.HeaderRightSide>
       </SC.Header>
       <SC.TasksGroupWrapper>
-        {tasksGroup.map(({ title, count, groupStatus }) => (
-          <StatusGroup
-            key={title}
-            count={count}
-            groupStatus={groupStatus}
-            tasks={tasks}
-            title={title}
-          />
-        ))}
+        {Object.entries(statusGroup).map(([columnId, column] ) => {
+          return (
+            <StatusGroup
+              key={column.title}
+              count={column.count}
+              tasks={column.items}
+              title={column.title}
+            />
+          );
+        })}
         <div>
           <SC.CreateStatusButton>
             <img src={GrayPlus} alt='' />
