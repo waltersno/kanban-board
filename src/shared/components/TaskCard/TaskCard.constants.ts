@@ -1,4 +1,4 @@
-import { ETaskTypes } from "shared/types/tasks-types";
+import { ETaskTypes } from 'shared/types/tasks-types';
 
 type TTaskColorInfo = {
   [key in ETaskTypes]: {
@@ -31,6 +31,10 @@ export const TaskColorInfo: TTaskColorInfo = {
   [ETaskTypes.PURPLE]: {
     bgColor: '#F2BAE1',
     timeColor: '#8E4778',
+  },
+  [ETaskTypes.UNKNOWN]: {
+    bgColor: '#7a6dff',
+    timeColor: '#451fdd',
   },
   [ETaskTypes.DISABLED]: {
     bgColor: '#F0F0F0',

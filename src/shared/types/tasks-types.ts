@@ -5,6 +5,7 @@ export const enum ETaskTypes {
   ORANGE = 'orange',
   RED = 'red',
   PURPLE = 'purple',
+  UNKNOWN = 'unknown',
   DISABLED = 'disabled',
 }
 
