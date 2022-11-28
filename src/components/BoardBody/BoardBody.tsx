@@ -85,7 +85,7 @@ export const BoardBody = () => {
                     innerRef={provided.innerRef}
                     provided={provided}
                     groupStatus={column.groupStatus}
-                    count={column.count}
+                    count={column.items.length}
                     tasks={column.items}
                     title={column.title}
                   />

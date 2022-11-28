@@ -115,25 +115,21 @@ export const tasksList: ITask[] = [
 export const tasksGroup: ITaskGroups = {
   [EStatuses.NEW_TASK]: {
     title: 'New Task',
-    count: 4,
     groupStatus: EStatuses.NEW_TASK,
     items: tasksList.filter((task) => task.status === EStatuses.NEW_TASK),
   },
   [EStatuses.SCHEDULED]: {
     title: 'Scheduled',
-    count: 3,
     groupStatus: EStatuses.SCHEDULED,
     items: tasksList.filter((task) => task.status === EStatuses.SCHEDULED),
   },
   [EStatuses.IN_PROGRESS]: {
     title: 'In progress',
-    count: 3,
     groupStatus: EStatuses.IN_PROGRESS,
     items: tasksList.filter((task) => task.status === EStatuses.IN_PROGRESS),
   },
   [EStatuses.COMPLETED]: {
     title: 'Completed',
-    count: 5,
     groupStatus: EStatuses.COMPLETED,
     items: tasksList.filter((task) => task.status === EStatuses.COMPLETED),
   },
