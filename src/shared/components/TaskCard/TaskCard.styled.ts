@@ -12,6 +12,7 @@ const TaskCardWrapper = styled.div<ITaskCardWrapper>`
   gap: 3px;
   padding: 15px;
   border-radius: 8px;
+  cursor: grab;
   background-color: ${({ type }) => TaskColorInfo[type].bgColor};
 
   > h6 {

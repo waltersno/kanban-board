@@ -1,18 +1,18 @@
-import { FC } from 'react';
-import { ETaskTypes } from 'shared/types/tasks-types';
+import { FC, useRef } from 'react';
+import { ITask } from 'shared/types/models';
 import { StyledTaskCard as SC } from './TaskCard.styled';
 
 interface ITaskCard {
-  title: string;
-  time: string;
-  type: ETaskTypes;
+  task: ITask;
 }
 
-export const TaskCard: FC<ITaskCard> = ({ title, time, type }) => {
+export const TaskCard: FC<ITaskCard> = ({ task }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
-    <SC.TaskCardWrapper type={type}>
-      <h6>{title}</h6>
-      <time>{time}</time>
+    <SC.TaskCardWrapper ref={ref} type={task.cardType}>
+      <h6>{task.taskTitle}</h6>
+      <time>{task.time}</time>
     </SC.TaskCardWrapper>
   );
 };

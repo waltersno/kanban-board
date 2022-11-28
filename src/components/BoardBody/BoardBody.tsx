@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { Button } from 'shared/components/Button/Button';
 import { Dropdown } from 'shared/components/Dropdown/Dropdown';
 import { SearchInput } from 'shared/components/SearchInput/SearchInput';
-import { TaskCard } from 'shared/components/TaskCard/TaskCard';
-import { generateReactKey } from 'shared/helpers/react';
+import { StatusGroup } from 'shared/components/StatusGroup/StatusGroup';
 import { tasksGroup, tasksList } from './BoardBody.data';
 import { StyledHeader as SC } from './BoardBody.styled';
 
@@ -34,24 +33,13 @@ export const BoardBody = () => {
       </SC.Header>
       <SC.TasksGroupWrapper>
         {tasksGroup.map(({ title, count, groupStatus }) => (
-          <SC.TaskGroup key={title}>
-            <SC.TaskGroupHeader>
-              <h3>{title}</h3>
-              <span>{count}</span>
-            </SC.TaskGroupHeader>
-            <SC.TasksWrapper>
-              {tasks
-                .filter((task) => task.status === groupStatus)
-                .map(({ taskTitle, time, type }, index) => (
-                  <TaskCard
-                    time={time}
-                    title={taskTitle}
-                    type={type}
-                    key={generateReactKey(index)}
-                  />
-                ))}
-            </SC.TasksWrapper>
-          </SC.TaskGroup>
+          <StatusGroup
+            key={title}
+            count={count}
+            groupStatus={groupStatus}
+            tasks={tasks}
+            title={title}
+          />
         ))}
         <div>
           <SC.CreateStatusButton>

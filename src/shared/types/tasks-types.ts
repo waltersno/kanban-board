@@ -7,3 +7,10 @@ export const enum ETaskTypes {
   PURPLE = 'purple',
   DISABLED = 'disabled',
 }
+
+export enum EStatuses {
+  NEW_TASK = 'newTask',
+  SCHEDULED = 'scheduled',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+}
